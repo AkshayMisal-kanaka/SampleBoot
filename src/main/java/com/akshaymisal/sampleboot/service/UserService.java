@@ -10,6 +10,6 @@ public class UserService {
 	}
 
 	public String getMessageWithName(String name) {
-		return "Hello " + name + "!!!";
+		return "Your name is " + name + "!!!";
 	}
 }
