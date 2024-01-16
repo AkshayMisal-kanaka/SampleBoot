@@ -13,8 +13,8 @@ public class WelcomeController {
 		return "Hello !!!";
 	}
 	
-	@GetMapping("/{message}")
-	String message(@PathVariable("message") String  message){
-		return "Hello " + message;
+	@GetMapping("/{name}")
+	String message(@PathVariable("name") String  name){
+		return "Hello " + name + "!!!";
 	}
 }
