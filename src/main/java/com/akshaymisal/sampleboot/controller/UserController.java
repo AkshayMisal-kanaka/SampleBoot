@@ -1,5 +1,7 @@
 package com.akshaymisal.sampleboot.controller;
 
+import java.net.UnknownHostException;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,7 +12,7 @@ import lombok.AllArgsConstructor;
 
 @RestController
 @AllArgsConstructor
-public class WelcomeController {
+public class UserController {
 
 	UserService userService;
 	
@@ -23,5 +25,10 @@ public class WelcomeController {
 	@GetMapping("/{name}")
 	String message(@PathVariable("name") String  name){
 		return this.userService.getMessageWithName(name);
+	}
+	
+	@GetMapping("/env")
+	String getIp() throws UnknownHostException{
+		return this.userService.getEnvironmentName();
 	}
 }
