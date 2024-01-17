@@ -5,8 +5,8 @@ COPY pom.xml .
 RUN mvn clean package -Dmaven.test.skip -Dmaven.main.skip -Dspring-boot.repackage.skip && rm -r target/
 
 COPY src ./src
-RUN mvn clean package
-#RUN mvn clean package  -Dmaven.test.skip
+#RUN mvn clean package
+RUN mvn clean package  -Dmaven.test.skip
 #RUN mvn -f pom.xml clean package
 
 FROM openjdk:17-oracle
