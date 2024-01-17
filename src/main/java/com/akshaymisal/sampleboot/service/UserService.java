@@ -15,7 +15,7 @@ public class UserService {
 		// TODO Auto-generated constructor stub
 	}
 	public String getMessage() {
-		return "Hello !!!";
+		return "This is sampel boot application !!!";
 	}
 
 	public String getMessageWithName(String name) {
