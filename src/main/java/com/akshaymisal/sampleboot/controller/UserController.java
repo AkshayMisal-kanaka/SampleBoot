@@ -1,11 +1,16 @@
 package com.akshaymisal.sampleboot.controller;
 
 import java.net.UnknownHostException;
+import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.akshaymisal.sampleboot.dto.UserDTO;
 import com.akshaymisal.sampleboot.service.UserService;
 
 import lombok.AllArgsConstructor;
@@ -30,5 +35,27 @@ public class UserController {
 	@GetMapping("/env")
 	String getIp() throws UnknownHostException{
 		return this.userService.getEnvironmentName();
+	}
+	
+	@PostMapping("/users")
+	UserDTO createUser(@RequestBody UserDTO user){
+		System.out.println(user);
+		return this.userService.createUser(user);
+	}
+	
+	@GetMapping("/users/all")
+	List<UserDTO> getAll(){
+		return this.userService.getAllUsers();
+	}
+	
+	@GetMapping("/users/{id}")
+	UserDTO getById(@PathVariable("id") Integer userId){
+		return this.userService.getById(userId);
+	}
+	
+	@DeleteMapping("/users/{id}")
+	String deleteById(@PathVariable("id") Integer userId){
+		this.userService.deleteUser(userId);
+		return "User deleted successfully";
 	}
 }
