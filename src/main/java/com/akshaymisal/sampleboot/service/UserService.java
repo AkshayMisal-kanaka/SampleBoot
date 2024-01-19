@@ -52,6 +52,13 @@ public class UserService {
 		return toUserDto(savedUser);
 	}
 	
+	public UserDTO updateUser(Integer userId, UserDTO userToCreate) {
+		User user = toUser(userToCreate);
+		user.setId(userId);
+		User savedUser = userRepository.save(user);
+		return toUserDto(savedUser);
+	}
+	
 	public void deleteUser(Integer userId) {
 		userRepository.deleteById(userId);
 	}

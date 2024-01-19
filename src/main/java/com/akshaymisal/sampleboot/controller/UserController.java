@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,8 +40,12 @@ public class UserController {
 	
 	@PostMapping("/users")
 	UserDTO createUser(@RequestBody UserDTO user){
-		System.out.println(user);
 		return this.userService.createUser(user);
+	}
+	
+	@PutMapping("/users/{id}")
+	UserDTO createUser(@PathVariable("id") Integer id, @RequestBody UserDTO user){
+		return this.userService.updateUser(id, user);
 	}
 	
 	@GetMapping("/users/all")
