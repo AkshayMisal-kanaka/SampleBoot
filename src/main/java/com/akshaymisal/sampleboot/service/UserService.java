@@ -47,14 +47,17 @@ public class UserService {
 	}
 	
 	public UserDTO createUser(UserDTO userToCreate) {
-		User user = toUser(userToCreate);
+		User user = toUser(new User(), userToCreate);
 		User savedUser = userRepository.save(user);
 		return toUserDto(savedUser);
 	}
 	
 	public UserDTO updateUser(Integer userId, UserDTO userToCreate) {
-		User user = toUser(userToCreate);
-		user.setId(userId);
+		Optional<User> userToUpdate = userRepository.findById(userId);
+		if(userToUpdate.isEmpty()) {
+			throw new RuntimeException("User not found with user id: "+ userId);
+		}
+		User user = toUser(userToUpdate.get(), userToCreate);
 		User savedUser = userRepository.save(user);
 		return toUserDto(savedUser);
 	}
@@ -63,9 +66,7 @@ public class UserService {
 		userRepository.deleteById(userId);
 	}
 	
-	private User toUser(UserDTO userDTO) {
-		User user = new User();
-		user.setId(userDTO.getId());
+	private User toUser(User user, UserDTO userDTO) {
 		user.setFirstName(userDTO.getFirstName());
 		user.setLastName(userDTO.getLastName());
 		user.setUsername(userDTO.getUsername());
